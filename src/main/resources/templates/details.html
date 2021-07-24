@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Business card</title>
+<link href="/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}" />
+</head>
+<body>
+	<header th:insert="menu.html"></header>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="display-4" th:text="#{person.details.header}" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><span th:text="${person.name}"></span></li>
+					<li class="list-group-item"><span th:text="${person.surname}"></span></li>
+					<li class="list-group-item"><span th:text="${person.email}"></span></li>
+					<li class="list-group-item"><span th:text="${person.phone}"></span></li>
+
+
+
+					<li class="list-group-item"><span
+						th:text="${person.address.city}">City</span> <span
+						th:text="${', ul. ' + person.address.street}">Street</span> <span
+						th:text="${person.address.streetNumber}">Street Number</span> <span
+						th:if="${person.address.homeNumber}"
+						th:text="${'/ '+person.address.homeNumber}">Home Number</span></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+
+</body>
+</html>

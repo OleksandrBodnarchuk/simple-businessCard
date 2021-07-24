@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Business card</title>
+<link href="/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}" />
+</head>
+<body>
+	<header th:insert="menu.html"></header>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 class="display-4" th:text="#{person.list.header}"></h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="row col-md-10 table-responsive">
+				<table id="personTable" class="table"
+					th:if="${personList != null && !personList.isEmpty()}">
+					<thead>
+						<tr>
+							<th th:text="#{person.list.name}"></th>
+							<th th:text="#{person.list.surname}"></th>
+							<th th:text="#{person.list.email}"></th>
+							<th th:text="#{person.list.phone}"></th>
+							<th th:text="#{person.list.details}"></th>
+							<th th:text="#{person.list.edit}"></th>
+							<th th:text="#{person.list.delete}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="person, rowStat:${personList}"
+							th:style="${rowStat.odd} ? 'color:gray' : 'color:blue;'">
+							<td th:text="${person.name}"></td>
+							<td th:text="${person.surname}"></td>
+							<td th:text="${person.email}"></td>
+							<td th:text="${person.phone}"></td>
+
+							<td><a th:href="@{'/person/details/'+ ${person.personUUid}}" class="btn btn-info btn-sm">
+								<span th:text="#{person.list.details}"></span>
+							</a>
+							</td>
+							<td><a th:href="@{'/person/edit/'+ ${person.personUUid}}" class="btn btn-success btn-sm">
+								<span th:text="#{person.list.edit}"></span>
+							</a>
+							</td>
+							<td><a th:href="@{'/person/delete/'+ ${person.personUUid}}" class="btn btn-danger btn-sm">
+								<span th:text="#{person.list.delete}"></span>
+							</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<span th:if="${personList == null || personList.isEmpty()}"
+					th:text="#{person.list.empty}"></span>
+
+			</div>
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+
+</body>
+</html>
